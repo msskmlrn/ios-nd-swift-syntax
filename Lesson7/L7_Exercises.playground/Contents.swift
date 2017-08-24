@@ -27,83 +27,95 @@ var espressoForGabrielle = macchiato
 espressoForGabrielle.steamedMilk = .splash
 macchiato.steamedMilk
 
+//struct = .none
+//class = .splash
+
 //: __Problem 2__
 //:
 //: __2a.__
 //: Write an enum to represent the five fingers on a human hand.
 //:
+//enum Finger {
+//    case thumb, index, middle, ring, pinky
+//}
+
+
 //: __2b.__
 //: Associate an Int value with each finger.
+
+enum Finger: Int {
+    case thumb, index, middle, ring, pinky
+}
 
 //: __Problem 3__
 //:
 //: Enum, class, or struct?
 //:
 //: Uncomment the code below and choose whether each type should be an enum, class, or struct.
-//____ Window {
-//    let height: Double
-//    let width: Double
-//    var open: Bool
-//}
+struct Window {
+    let height: Double
+    let width: Double
+    var open: Bool
+}
 
-//____ WritingImplement {
-//    case pen
-//    case pencil
-//    case marker
-//    case crayon
-//    case chalk
-//}
+enum WritingImplement {
+    case pen
+    case pencil
+    case marker
+    case crayon
+    case chalk
+}
 
-//____ Material {
-//    let name: String
-//    let density: Double
-//    let stiffness: Double
-//}
+struct Material {
+    let name: String
+    let density: Double
+    let stiffness: Double
+}
 
 
-//____ Bicycle {
-//    let frame: Material
-//    let weight: Double
-//    let category: String
-//
-//    static var bikeCategories: [String] = ["Road", "Touring", "Mountain", "Commuter", "BMX"]
-//
-//    func lookCool() {
-//        print("Check out my gear-shifters!")
-//    }
-//}
+struct Bicycle {
+    let frame: Material
+    let weight: Double
+    let category: String
 
-//____ Cyclist {
-//    var speed: Double
-//    let agility: Double
-//    let bike: Bicycle
-//
-//    var maneuverability: Double {
-//        get {
-//            return agility - speed/5
-//        }
-//    }
-//
-//    init(speed: Double, agility: Double, bike: Bicycle) {
-//        self.speed = speed
-//        self.agility = agility
-//        self.bike = bike
-//    }
-//
-//    func brake() {
-//        speed -= 1
-//    }
-//
-//    func pedalFaster(factor: Double) {
-//        speed * factor
-//    }
-//}
+    static var bikeCategories: [String] = ["Road", "Touring", "Mountain", "Commuter", "BMX"]
 
-//____ Size: String {
-//    case small = "8 ounces"
-//    case medium = "12 ounces"
-//    case large = "16 ounces"
-//}
+    func lookCool() {
+        print("Check out my gear-shifters!")
+    }
+}
+
+class Cyclist {
+    var speed: Double
+    let agility: Double
+    let bike: Bicycle
+
+    var maneuverability: Double {
+        get {
+            return agility - speed/5
+        }
+    }
+
+    init(speed: Double, agility: Double, bike: Bicycle) {
+        self.speed = speed
+        self.agility = agility
+        self.bike = bike
+    }
+
+    func brake() {
+        speed -= 1
+    }
+
+    func pedalFaster(factor: Double) {
+        speed * factor
+    }
+}
+
+enum Size: String {
+    case small = "8 ounces"
+    case medium = "12 ounces"
+    case large = "16 ounces"
+}
 
 //: __Problem 4__
 //:
@@ -111,6 +123,28 @@ macchiato.steamedMilk
 //:
 //: __4a.__
 //: Include 2 stored properties. Examples might include a string representing flavor, or an int representing minutesSinceRemovalFromOven.
+
+struct Cookie {
+    let flavor: String
+    let minutesSinceBaking: Int
+    var delicious: Bool {
+        get {
+            if flavor == "Chocolate Chip" || (minutesSinceBaking < 30) {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+
+    
+    func tempt() -> Bool {
+        return delicious
+    }
+}
+
+var cookie = Cookie(flavor: "Vanilla", minutesSinceBaking: 0)
+cookie.tempt()
 
 //:__4b.__
 //: Add a computed property, "delicious", a bool whose value depends upon the values of the stored properties.
@@ -136,3 +170,28 @@ macchiato.steamedMilk
 
 //: __5d.__
 //: Create an instance of your BnBListing class and call one of its methods.
+
+enum Housing {
+    case mansion, apartment, shack, house
+}
+
+class BedAndBreakfast {
+    let category: Housing
+    var available: Bool
+    let capacity: Int
+    
+    func book() {
+        if (available) {
+            available = false
+        }
+    }
+    
+    init(category: Housing, available: Bool, capacity: Int) {
+        self.category = category
+        self.available = available
+        self.capacity = capacity
+    }
+}
+
+var bAndB = BedAndBreakfast(category: .mansion, available: false, capacity: 10)
+bAndB.book()

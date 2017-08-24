@@ -5,11 +5,27 @@ protocol DirtyDeeds {
     func steal()
 }
 
-class Minion: DirtyDeeds {
+class Minion: DirtyDeeds, Souschef {
     var name: String
     
     init(name:String) {
         self.name =  name
+    }
+    
+    func cheat() {
+        
+    }
+    
+    func steal() {
+        
+    }
+    
+    func rinse(_ vegetable: String) -> String {
+        return ""
+    }
+    
+    func chop(_ vegetable: String) -> String {
+        return ""
     }
 }
 
@@ -37,12 +53,13 @@ protocol DogWalker {
 
 class Neighbor: DogWalker {
     
-    func throwBall(_ numberOfTimes:Int) {
+    func throwBall(_ numberOfTimes:Int) -> Int {
         var count = 0
         while count < numberOfTimes {
             print("Go get it!")
             count += 1
         }
+        return count
     }
     
     func rubBelly() {

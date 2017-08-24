@@ -15,10 +15,24 @@ let orderedSurnames = surnames.sorted(by: {(name1: String, name2: String) -> Boo
     return name2 > name1
 })
 
+let surnamesInReverseOrder = surnames.sorted(by: {(name1: String, name2: String) -> Bool in
+    return name1 > name2
+})
+
+let surnamesInReverseOrder2 = surnames.sorted(by: {
+    $0 > $1
+})
+
+
+
 // 2
 let battingAverages = [0.302, 0.556, 0.280, 0.500, 0.281, 0.285]
 let sortedAverages = battingAverages.sorted(by: {(average1: Double, average2: Double) -> Bool in
     return average2 > average1
+})
+
+let reverseSortedAverages = battingAverages.sorted(by: {
+    $0 > $1
 })
 
 //: __Problem 3__
@@ -35,11 +49,17 @@ let numbersAsStrings = ["685", "1728", "648", "87", "979", "59175432"]
 
 //: __3b.__
 //: Rewrite the filtering closure expression to be as concise as possible.
-
+let strings = numbersAsStrings.filter(){
+    Int($0)! % 12 == 0
+}
 //: __Problem 4__
 //:
 //: Filtering out particles greater that 20 microns has been shown to reduce exposure to waterborne pathogens. Filter the following array for all of the particles below 20 microns in size. Assign the result to a new array.
 let particleSizesInMicrons = [150, 16, 82, 30, 10, 57]
+
+let filteredParticles = particleSizesInMicrons.filter() {
+    $0 < 20
+}
 
 //: __Problem 5__
 //:
@@ -52,6 +72,9 @@ let sizesAsStrings = particleSizesInMicrons.map({ (size: Int) -> String in
 //: Ben just got back from India and he is tallying what he spent on gifts for his customs form.
 //: Use the map() method to transform this array of prices into dollars. Round to the nearest dollar.
 let pricesInRupees = [750, 825, 2000, 725]
+let dollars = pricesInRupees.map({
+    (Double($0) * 0.015617).rounded()
+})
 
 //: __Problem 6__
 //:
@@ -73,3 +96,6 @@ func timeStringFromInterval(_ timeInterval: Int) -> NSString {
 }
 
 var oldTimes = ["5:18", "5:45", "5:56", "5:25", "5:27"]
+let goalTimes = oldTimes.map(){
+    timeStringFromInterval(timeIntervalFromString($0) + (13 * 1)) as String
+}
